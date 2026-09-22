@@ -1,0 +1,164 @@
+http://localhost:4004/odata/v4/catalog
+ 
+###
+http://localhost:4004/odata/v4/catalog/BPSry
+ 
+###
+http://localhost:4004/odata/v4/catalog/ProductSry
+ 
+###
+http://localhost:4004/odata/v4/catalog/EmployeeSrv
+ 
+###
+http://localhost:4004/odata/v4/catalog/AddressSry
+ 
+###
+http://localhost:4004/odata/v4/catalog/POSrv
+ 
+###
+http://localhost:4004/odata/v4/catalog/POItemSrv
+
+
+### metedata of the service
+http://localhost:4004/odata/v4/catalog/$metadata
+
+### $top, $skip, $count, $select, $filter, Sexpand
+### Read the data from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv
+
+### Read the data from Product Service
+GET http://localhost:4004/odata/v4/catalog/ProductSry
+
+### Read first 10 employees from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$top=10
+
+### Read 11th to 20th record of employee by skiping first 10 records
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$top=10&$skip=10
+
+
+### Read number of employees from the service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv/$count
+
+### Read specific details of an employee
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$select=nameFirst,nameLast,phoneNumber
+
+### Read only female employee details
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$filter=gender eq 'F'
+
+
+### eq -> Equals to, gt -> Greater Than, It -> Lesser Than, ge -> Greater Than or Equal to, le -> Lesser Than or Equal to
+### Read employee details where their salary is more than 50000 USD
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?Sfilter=salaryAmount gt 5000
+
+### Read all header and item information from any service
+GET http://localhost:4004/odata/v4/catalog/POSry?$expand=Items
+
+### Read a specific employee from the Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv(02BD2137-0890-1EEA-A6C2-BB55C198C7FB)
+
+### Insert a record into the Employee Service
+POST http://localhost:4004/odata/v4/catalog/EmployeeSrv
+Content-Type: application/json
+
+{
+  "Currency_code": "USD",
+  "ID": "02BD2137-0890-1EEA-A6C2-BB55C198C999",
+  "accountNumber": "87654999",
+  "bandId": "1980019999",
+  "bankName": "My Bank of 999",
+  "email": "john999.nicols@itelo.info",
+  "gender": "M",
+  "language": "E",
+  "loginName": "NICOLSJ",
+  "nameFirst": "John",
+  "nameInitials": null,
+  "nameLast": "Nicols",
+  "nameMiddle": null,
+  "phoneNumber": "+1 224 774 999",
+  "salaryAmount": "61579.00"
+}
+
+### Update salary of an employee
+PUT http://localhost:4004/odata/v4/catalog/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C198C999
+Content-Type: application/json
+
+{
+   "Currency_code": "USD", 
+   "salaryAmount": "222.00"
+}
+
+### Remove an employee from Employee Table
+DELETE http://localhost:4004/odata/v4/catalog/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C198C999
+
+
+### new product
+POST http://localhost:4004/odata/v4/catalog/ProductSrv
+Content-Type: application/json
+
+{
+      "BP_NODE_KEY": "74867AD200E41EDBA5D8B06B26EB4999",
+      "CATEGORY": "Notebooks",
+      "CURRENCY_CODE": "EUR",
+      "DEPTH": "18.00",
+      "DESCRIPTION": "Notebook Basic 15 with 2,80 GHz quad core, 15LCD, 4 GB DDR3 RAM, 500 GB Hard Disc, Windows 8 Pro",
+      "DIM_UNIT": "CM",
+      "HEIGHT": "3.00",
+      "MEASURE_UNIT": "EA",
+      "NODE_KEY": "74867AD200E41EDBA5D8B06B26EB4999",
+      "PRICE": "956.00",
+      "PRODUCT_ID": "HT-1000",
+      "TAX_TARIF_CODE": 1,
+      "TYPE_CODE": "PR",
+      "WEIGHT_MEASURE": "4.20",
+      "WEIGHT_UNIT": "KG",
+      "WIDHT": "30.00"
+    }
+
+### updte
+PUT http://localhost:4004/odata/v4/catalog/ProductSry/74867AD200E41EDBA5D8B06B26EB4999
+Content-Type: application/json
+
+{   
+    "CURRENCY_CODE": "USD",
+    "PRICE": "100000.00"
+}
+
+### to call function
+GET http://localhost:4004/odata/v4/catalog/getTopfiveSalariedEmployees()
+
+### to call function
+GET http://localhost:4004/odata/v4/catalog/getTop10Products()
+
+### insert employss service
+POST http://localhost:4004/odata/v4/catalog/createEmployee
+Content-Type: application/json
+
+{
+    "input" :[
+                {  
+                "Currency_code": "USD",
+                "ID": "02BD2137-0890-1EEA-A6C2-BB55C198C444",
+                "accountNumber": "87654999",
+                "bandId": "1980019999",
+                "bankName": "My Bank of 999",
+                "email": "john999.nicols@itelo.info",
+                "gender": "M",
+                "language": "E",
+                "loginName": "NICOLSJ",
+                "nameFirst": "John",
+                "nameInitials": null,
+                "nameLast": "Nicols",
+                "nameMiddle": null,
+                "phoneNumber": "+1 224 774 999",
+                "salaryAmount": "61579.00"
+                }
+    ]
+}
+
+
+### dicdount
+POST  http://localhost:4004/odata/v4/catalog/POSrv/74867AD200E41EDBA5D8B0C98DC28052/discountPrice
+Content-Type: application/json
+
+### largestOrder
+GET http://localhost:4004/odata/v4/catalog/POSrv/74867AD200E41EDBA5D8B0C98DC28052/largestOrder()
