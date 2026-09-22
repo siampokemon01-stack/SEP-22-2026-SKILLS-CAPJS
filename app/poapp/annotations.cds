@@ -194,7 +194,7 @@ annotate service.POItemSrv with @(
             Value: NET_AMOUNT
         },
         {
-            SType: 'UI.DataField',
+            $Type: 'UI.DataField',
             Value: TAX_AMOUNT,
         },
         {

@@ -55,7 +55,7 @@ context master {
         WEIGHT_UNIT     : String(2)         @(title : '{i18n>WEIGHT_UNIT}');
         PRICE           : Decimal(15,2)     @(title : '{i18n>PRICE}');
         CURRENCY_CODE   : String(4)         @(title : '{i18n>CURRENCY_CODE}');
-        WIDHT           : Decimal(5,2)      @(title : '{i18n>WIDHT}');
+        WIDHT           : Decimal(5,2)      @(title : '{i18n>WIDTH}');
         DEPTH           : Decimal(5,2)      @(title : '{i18n>DEPTH}');
         HEIGHT          : Decimal(5,2)      @(title : '{i18n>HEIGHT}');
         DIM_UNIT        : String(2)         @(title : '{i18n>DIM_UNIT}');
@@ -89,7 +89,7 @@ context transaction {
         OVERALL_STATUS      : String(1)     @(title : '{i18n>OVERALL_STATUS}');
         // Managed Association of different context - Cardinality - one to one
         PARTNER : Association to one master.BusinessPartners    @(title : '{i18n>PARTNER_GUID}');
-        //Unamanged Assocation - Cardinality - one to many
+        //Unamanged Assocation with Cardinality - one to many
         Items : Association to many PurchaseItems on Items.PARENT = $self
     }
 
@@ -97,7 +97,9 @@ context transaction {
         key NODE_KEY    : cmn.identity      @(title : '{i18n>NODE_KEY}');
         PO_ITEMS_POS    : Integer           @(title : '{i18n>PO_ITEMS_POS}');
         PARENT : Association to one PurchaseOrders  @(title : '{i18n>PARENT_KEY}');
-        // Managed Association of different context - Cardinality - one to one
+
+        // Managed Association of different context with Cardinality with one to one
+        
         PROD : Association to one master.Products   @(title : '{i18n>PRODUCT_ID}');
     }
 
