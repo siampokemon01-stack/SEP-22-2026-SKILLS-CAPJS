@@ -20,7 +20,8 @@ type createEmployeeInput : array of {
     salaryAmount : common.AmountT;
 }
 
-service CatalogService{
+service CatalogService @(require: 'authenticated-user'){
+    
     //@insertonly
     entity ProductSrv as projection on db.master.Products;
 
